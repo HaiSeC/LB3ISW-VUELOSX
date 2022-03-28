@@ -5,16 +5,22 @@
 package PRTS;
 
 import DTS.Consultas;
+import DTS.PieChart;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
-
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
 /**
  *
  * @author Cris
  */
 public class Principal extends javax.swing.JFrame {
-
+    PieChart PC = new PieChart();
     Consultas Datos = new Consultas();
     /**
      * Creates new form Principal
@@ -25,57 +31,57 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void disabled () {
-           jComboBox1.setVisible(false);
-        jButton2.setVisible(false);
+           CBoxQD.setVisible(false);
+        BtnQuery.setVisible(false);
     }
     public void enabled() {
-        jComboBox1.setVisible(true);
-        jButton2.setVisible(true);
+        CBoxQD.setVisible(true);
+        BtnQuery.setVisible(true);
     }
     
     public void cargarAviones() {
         DefaultComboBoxModel cobomodel = new DefaultComboBoxModel(Datos.cargarAviones());
-        jComboBox1.setModel(cobomodel);
+        CBoxQD.setModel(cobomodel);
         enabled();
     }
     public void cargarAerolineas() {
         DefaultComboBoxModel cobomodel = new DefaultComboBoxModel(Datos.cargarAerolineas());
-        jComboBox1.setModel(cobomodel);
+        CBoxQD.setModel(cobomodel);
         enabled();
     }
     
     
     public void buscarCVuelos() {
         String[] column = {"Modelo Avion", "Cantidad de Vuelos"};
-        String selection = jComboBox1.getSelectedItem().toString();
+        String selection = CBoxQD.getSelectedItem().toString();
         Object[] row = { selection,Datos.obtenerCantidadVuelos(Datos.obtenerCodigo(selection))};
         
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
-        jTable1.setModel(model);
+        TblData.setModel(model);
         model.addRow(row);
     }
     public void buscarAL() {
         String[] column = {"Aerolinea", "Cantidad de Vuelos"};
-        String selection = jComboBox1.getSelectedItem().toString();
+        String selection = CBoxQD.getSelectedItem().toString();
         Object[] row = { selection,Datos.obtenerCantidadVuelosAL(selection)};
         
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
-        jTable1.setModel(model);
+        TblData.setModel(model);
         model.addRow(row);
     }
     public void buscarTRxAL() {
         String[] column = {"Nombre", "Aerolinea", "Rol", "Id Vuelo"};
-        String selection = jComboBox1.getSelectedItem().toString();
+        String selection = CBoxQD.getSelectedItem().toString();
         ArrayList<String[]> rows = Datos.obtenerTripulacionAL(selection);
         
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
-        jTable1.setModel(model);
+        TblData.setModel(model);
         for (int i = 0; i < rows.size(); i++) {
             String[] row = rows.get(i);
             model.addRow(row);
@@ -89,7 +95,7 @@ public class Principal extends javax.swing.JFrame {
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
-        jTable1.setModel(model);
+        TblData.setModel(model);
         for (int i = 0; i < rows.size(); i++) {
             String[] row = rows.get(i);
             model.addRow(row);
@@ -103,28 +109,37 @@ public class Principal extends javax.swing.JFrame {
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
-        jTable1.setModel(model);
+        TblData.setModel(model);
         for (int i = 0; i < rows.size(); i++) {
             String[] row = rows.get(i);
             model.addRow(row);
         }
         
     }
-    public void buscarTripulantes() {
+
+     public void buscarTripulantes() {
+=======
+
         String[] column = {"Nombre", "Edad"};
         ArrayList<String[]> rows = Datos.buscarTripulantes();
         
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
-        jTable1.setModel(model);
+
+        TblData.setModel(model);
+=======
+
         for (int i = 0; i < rows.size(); i++) {
             String[] row = rows.get(i);
             model.addRow(row);
         }
+
+     }
+=======
         
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,39 +150,37 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        BtnGrCV = new javax.swing.JRadioButton();
+        BtnGrA = new javax.swing.JRadioButton();
+        BtnGrP = new javax.swing.JRadioButton();
+        SP = new javax.swing.JScrollPane();
+        TblData = new javax.swing.JTable();
+        BtnSearch = new javax.swing.JButton();
+        BtnQuery = new javax.swing.JButton();
+        BtnGrSC = new javax.swing.JRadioButton();
+        BtnGrVP = new javax.swing.JRadioButton();
+        CBoxQD = new javax.swing.JComboBox<>();
+        BtnGrTP = new javax.swing.JRadioButton();
+        Menu = new javax.swing.JMenuBar();
+        MStart = new javax.swing.JMenu();
+        BtnGraph = new javax.swing.JMenuItem();
+        BtnExit = new javax.swing.JMenuItem();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AeroPatos");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Cantidad de Vuelos");
+        buttonGroup1.add(BtnGrCV);
+        BtnGrCV.setText("Cantidad de Vuelos");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setSelected(true);
-        jRadioButton3.setText("Aerolineas");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
-            }
-        });
+        buttonGroup1.add(BtnGrA);
+        BtnGrA.setSelected(true);
+        BtnGrA.setText("Aerolineas");
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("Pilotos");
+        buttonGroup1.add(BtnGrP);
+        BtnGrP.setText("Pilotos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -178,38 +191,53 @@ public class Principal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        SP.setViewportView(TblData);
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnSearch.setText("Buscar");
+        BtnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnSearchActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnQuery.setText("Consultar");
+        BtnQuery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnQueryActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setText("Servicio al cliente");
+        buttonGroup1.add(BtnGrSC);
+        BtnGrSC.setText("Servicio al cliente");
 
-        buttonGroup1.add(jRadioButton6);
-        jRadioButton6.setText("Vuelos desde Panama");
+        buttonGroup1.add(BtnGrVP);
+        BtnGrVP.setText("Vuelos desde Panama");
 
-        buttonGroup1.add(jRadioButton7);
-        jRadioButton7.setText("Tripulantes");
+        buttonGroup1.add(BtnGrTP);
+        BtnGrTP.setText("Tripulantes");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        MStart.setText("Inicio");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        BtnGraph.setText("Gráfico");
+        BtnGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGraphActionPerformed(evt);
+            }
+        });
+        MStart.add(BtnGraph);
 
-        setJMenuBar(jMenuBar1);
+        BtnExit.setText("Salir");
+        BtnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExitActionPerformed(evt);
+            }
+        });
+        MStart.add(BtnExit);
+
+
+        Menu.add(MStart);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,98 +246,115 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(SP)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton3))
-                        .addGap(18, 18, 18)
+                            .addComponent(BtnGrCV)
+                            .addComponent(BtnGrA)
+                            .addComponent(BtnGrVP))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton4)
-                                .addGap(127, 127, 127)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnGrTP)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(BtnGrP)
+                                        .addGap(55, 55, 55))
+                                    .addComponent(BtnGrSC))
+                                .addGap(49, 49, 49)
+                                .addComponent(BtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CBoxQD, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton5)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+
+                                .addComponent(BtnQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)))))
+
+
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRadioButton3)
-                        .addComponent(jRadioButton4)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnGrCV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(BtnGrA)
+                                .addComponent(BtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnGrP))
+                            .addComponent(CBoxQD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BtnGrSC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jRadioButton7))
+
+                    .addComponent(BtnGrVP)
+                    .addComponent(BtnGrTP))
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SP, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jRadioButton1.isSelected()) {
-            cargarAviones();
-        } else  if (jRadioButton3.isSelected() || jRadioButton5.isSelected()) {
-            cargarAerolineas();
-        } else if (jRadioButton4.isSelected()) {
-           buscarPilotos();
-        } else if (jRadioButton6.isSelected()) {
-            buscarPistas();
-        } else if (jRadioButton7.isSelected()) {
-            buscarTripulantes();
-        }
-        
-    
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BtnQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQueryActionPerformed
+        if(BtnGrCV.isSelected()) {
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jRadioButton1.isSelected()) {
             buscarCVuelos();
-        } else  if (jRadioButton3.isSelected()) {
+        } else  if (BtnGrA.isSelected()) {
             buscarAL();
-        } else  if (jRadioButton5.isSelected()) {
+        } else  if (BtnGrSC.isSelected()) {
             buscarTRxAL();
         }
         
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnQueryActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    private void BtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExitActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnExitActionPerformed
+
+    private void BtnGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGraphActionPerformed
+        PC.BarChartz();
+    }//GEN-LAST:event_BtnGraphActionPerformed
+
+    private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
+        if(BtnGrCV.isSelected()) {
+            cargarAviones();
+        } else  if (BtnGrA.isSelected() || BtnGrSC.isSelected()) {
+            cargarAerolineas();
+        } else if (BtnGrP.isSelected()) {
+           buscarPilotos();
+        } else if (BtnGrVP.isSelected()) {
+            buscarPistas();
+        } else if (BtnGrTP.isSelected()) {
+            buscarTripulantes();
+        }
+    }//GEN-LAST:event_BtnSearchActionPerformed
 
     
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) {     
+        
+        try{
+            UIManager.setLookAndFeel(new FlatAtomOneDarkIJTheme());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -317,7 +362,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("FlatAtomOneDarkIJTheme".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -342,20 +387,22 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem BtnExit;
+    private javax.swing.JRadioButton BtnGrA;
+    private javax.swing.JRadioButton BtnGrCV;
+    private javax.swing.JRadioButton BtnGrP;
+    private javax.swing.JRadioButton BtnGrSC;
+    private javax.swing.JRadioButton BtnGrTP;
+    private javax.swing.JRadioButton BtnGrVP;
+    private javax.swing.JMenuItem BtnGraph;
+    private javax.swing.JButton BtnQuery;
+    private javax.swing.JButton BtnSearch;
+    private javax.swing.JComboBox<String> CBoxQD;
+    private javax.swing.JMenu MStart;
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JScrollPane SP;
+    private javax.swing.JTable TblData;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+
     // End of variables declaration//GEN-END:variables
 }

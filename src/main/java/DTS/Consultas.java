@@ -1,9 +1,11 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTS;
 
+import OBJS.ObjVar;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.ResultSet;
@@ -25,8 +27,9 @@ public class Consultas {
     private Calendar taday;
 
     public Consultas() {
-       
+
     }
+    
     
     public int obtenerCantidadVuelos(int codigo) {
         int cant = 0;
@@ -125,30 +128,8 @@ public class Consultas {
         }
         
         return Tripulacion;
-        
-        
-    }
-    public ArrayList<String[]> obtenerPilotos(){
-        ArrayList<String[]> Tripulacion = new ArrayList();
-        try {
-            connection = conexion.Conexion();
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT tr.nombre as nombre, tr.trabaja_aerolinea as aerolinea, av.modelo as modelo, pr.estado as estado_puerta FROM vuelo v, tripulacion tr, avion av, puerta pr " +
-            "WHERE CAST(tr.id_vuelo as integer) = v.id_vuelo AND v.c_avion = av.id AND v.p_abordaje = num_puerta AND tr.rol_tripulacion = 'Piloto'");
-            while (rs.next()) {
-                String[] row = {rs.getString("nombre"), rs.getString("aerolinea"), rs.getString("modelo"), rs.getString("estado_puerta")};
-                Tripulacion.add(row);
+       
             }
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Error de conexión", "Mensaje", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        return Tripulacion;
-        
-        
-    }
     public ArrayList<String[]> buscarTripulantes(){
         ArrayList<String[]> Tripulacion = new ArrayList();
         try {
@@ -164,6 +145,29 @@ public class Consultas {
                 String[] row = {rs.getString("nombre"), String.valueOf(msDiff /year)};
                 Tripulacion.add(row);
             } 
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error de conexión", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return Tripulacion;
+
+
+    }
+        
+    
+    public ArrayList<String[]> obtenerPilotos(){
+        ArrayList<String[]> Tripulacion = new ArrayList();
+        try {
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT tr.nombre as nombre, tr.trabaja_aerolinea as aerolinea, av.modelo as modelo, pr.estado as estado_puerta FROM vuelo v, tripulacion tr, avion av, puerta pr " +
+            "WHERE CAST(tr.id_vuelo as integer) = v.id_vuelo AND v.c_avion = av.id AND v.p_abordaje = num_puerta AND tr.rol_tripulacion = 'Piloto'");
+            while (rs.next()) {
+                String[] row = {rs.getString("nombre"), rs.getString("aerolinea"), rs.getString("modelo"), rs.getString("estado_puerta")};
+                Tripulacion.add(row);
+            }
         } catch (Exception e) {
             System.out.println(e);
             System.out.println(e.getMessage());
@@ -215,7 +219,23 @@ public class Consultas {
             avs[i]= avion;
         }
         return avs;
+    }
+        public ArrayList<ObjVar> Var(){   
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT distinct aa.nombre_aero AS aname, av.cantidad_pas AS avpas, ae.nombre_aerolinea AS aename FROM aeropuerto aa, avion av, aerolinea ae");           
+            while(rs.next()){
+                
+                ObjVar.Var.add(new ObjVar(rs.getString("aname"),rs.getInt("avpas"),rs.getString("aename")));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
         
+        return ObjVar.Var;        
+       
+    }
         
     }
-}
