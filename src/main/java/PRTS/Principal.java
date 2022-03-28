@@ -116,19 +116,30 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }
+
      public void buscarTripulantes() {
+=======
+
         String[] column = {"Nombre", "Edad"};
         ArrayList<String[]> rows = Datos.buscarTripulantes();
         
         
         DefaultTableModel model = new DefaultTableModel(column,0);
         
+
         TblData.setModel(model);
+=======
+
         for (int i = 0; i < rows.size(); i++) {
             String[] row = rows.get(i);
             model.addRow(row);
         }
+
      }
+=======
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,6 +165,7 @@ public class Principal extends javax.swing.JFrame {
         MStart = new javax.swing.JMenu();
         BtnGraph = new javax.swing.JMenuItem();
         BtnExit = new javax.swing.JMenuItem();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AeroPatos");
@@ -222,6 +234,7 @@ public class Principal extends javax.swing.JFrame {
         });
         MStart.add(BtnExit);
 
+
         Menu.add(MStart);
 
         setJMenuBar(Menu);
@@ -255,8 +268,11 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
                                 .addComponent(CBoxQD, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
+
                                 .addComponent(BtnQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)))))
+
+
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -277,8 +293,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(BtnGrSC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+
                     .addComponent(BtnGrVP)
                     .addComponent(BtnGrTP))
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SP, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -288,8 +306,10 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void BtnQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQueryActionPerformed
         if(BtnGrCV.isSelected()) {
+
             buscarCVuelos();
         } else  if (BtnGrA.isSelected()) {
             buscarAL();
@@ -383,5 +403,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane SP;
     private javax.swing.JTable TblData;
     private javax.swing.ButtonGroup buttonGroup1;
+
     // End of variables declaration//GEN-END:variables
 }
