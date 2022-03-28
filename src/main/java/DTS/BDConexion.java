@@ -18,7 +18,8 @@ public class BDConexion {
 
     public Connection Conexion() {
         String url = "jdbc:postgresql://localhost:5432/vuelosx";
-        String password = "Postgres3620";
+        //String password = "Postgres3620";
+        String password = "guerrero6";
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, "postgres", password);
