@@ -14,7 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+//import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
 /**
  *
  * @author Cris
@@ -329,6 +329,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGraphActionPerformed
 
     private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
+        disabled();
         if(BtnGrCV.isSelected()) {
             cargarAviones();
         } else  if (BtnGrA.isSelected() || BtnGrSC.isSelected()) {
@@ -349,11 +350,11 @@ public class Principal extends javax.swing.JFrame {
      */
     public static void main(String args[]) {     
         
-        try{
+        /*try{
             UIManager.setLookAndFeel(new FlatAtomOneDarkIJTheme());
         } catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
