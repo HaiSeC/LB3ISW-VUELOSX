@@ -5,9 +5,12 @@
 package DTS;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +22,11 @@ public class Consultas {
     private Statement s = null;
     BDConexion conexion = new BDConexion();
     private Connection connection = null;  
-    
+    private Calendar taday;
+
+    public Consultas() {
+       
+    }
     
     public int obtenerCantidadVuelos(int codigo) {
         int cant = 0;
@@ -132,6 +139,31 @@ public class Consultas {
                 String[] row = {rs.getString("nombre"), rs.getString("aerolinea"), rs.getString("modelo"), rs.getString("estado_puerta")};
                 Tripulacion.add(row);
             }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error de conexión", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return Tripulacion;
+        
+        
+    }
+    public ArrayList<String[]> buscarTripulantes(){
+        ArrayList<String[]> Tripulacion = new ArrayList();
+        try {
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT tr.nombre as nombre, tr.f_nacimiento as f_nacimiento FROM tripulacion tr");
+            while (rs.next()) {
+                Date date, todaydate;
+                todaydate = new Date();
+                date =new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("f_nacimiento")); 
+                long msDiff = todaydate.getTime() - date.getTime() ;
+                long year = (long) 3.156e+10;
+                String[] row = {rs.getString("nombre"), String.valueOf(msDiff /year)};
+                Tripulacion.add(row);
+            } 
         } catch (Exception e) {
             System.out.println(e);
             System.out.println(e.getMessage());

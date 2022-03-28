@@ -110,6 +110,20 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }
+    public void buscarTripulantes() {
+        String[] column = {"Nombre", "Edad"};
+        ArrayList<String[]> rows = Datos.buscarTripulantes();
+        
+        
+        DefaultTableModel model = new DefaultTableModel(column,0);
+        
+        jTable1.setModel(model);
+        for (int i = 0; i < rows.size(); i++) {
+            String[] row = rows.get(i);
+            model.addRow(row);
+        }
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,6 +145,7 @@ public class Principal extends javax.swing.JFrame {
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jRadioButton7 = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -185,6 +200,9 @@ public class Principal extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton6);
         jRadioButton6.setText("Vuelos desde Panama");
 
+        buttonGroup1.add(jRadioButton7);
+        jRadioButton7.setText("Tripulantes");
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -221,6 +239,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jRadioButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -240,7 +260,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton6)
+                    .addComponent(jRadioButton7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -258,6 +280,8 @@ public class Principal extends javax.swing.JFrame {
            buscarPilotos();
         } else if (jRadioButton6.isSelected()) {
             buscarPistas();
+        } else if (jRadioButton7.isSelected()) {
+            buscarTripulantes();
         }
         
     
@@ -330,6 +354,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
