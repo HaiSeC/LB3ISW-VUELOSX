@@ -118,7 +118,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
      public void buscarTripulantes() {
-=======
+
 
         String[] column = {"Nombre", "Edad"};
         ArrayList<String[]> rows = Datos.buscarTripulantes();
@@ -128,7 +128,7 @@ public class Principal extends javax.swing.JFrame {
         
 
         TblData.setModel(model);
-=======
+
 
         for (int i = 0; i < rows.size(); i++) {
             String[] row = rows.get(i);
@@ -136,9 +136,9 @@ public class Principal extends javax.swing.JFrame {
         }
 
      }
-=======
+
         
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
